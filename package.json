@@ -7,5 +7,8 @@
     "test": "jest"
   },
   "author": "Alejandro Madariaga Angeles",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jest-cli": "^12.0.2"
+  }
 }
