@@ -1,0 +1,11 @@
+{
+  "name": "math-parser",
+  "version": "1.0.0",
+  "description": "parses mathematical expersions (prefix) using binary trees",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Alejandro Madariaga Angeles",
+  "license": "ISC"
+}
