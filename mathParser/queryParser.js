@@ -11,7 +11,6 @@ function queryParser(query) {
         {symbol: '/', priority: 2},
         {symbol: '^', priority: 3}
     ];
-    query = trimWhitSpaces(query);
 
     let start = 0;
     let end = query.length;
@@ -33,7 +32,8 @@ function queryParser(query) {
 
             return rootNode;
         } else {
-            let number = Number(query.slice(start, end + 1));
+            let string = trimWhitSpaces(query.slice(start, end + 1));
+            let number = Number(string);
             return node(number);
         }
     }
