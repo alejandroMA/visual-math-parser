@@ -15,32 +15,32 @@ describe('queryParser', function() {
         query = '50+34-4.2+63';
 
         expect(queryParser(query)).toEqual({
-            data: '-',
+            data: '+',
             leftChild: {
-                data: '+',
+                data: '-',
                 leftChild: {
-                    data: 50,
-                    leftChild: undefined,
-                    rightChild: undefined
+                    data: '+',
+                    leftChild: {
+                        data: 50,
+                        leftChild: undefined,
+                        rightChild: undefined
+                    },
+                    rightChild: {
+                        data: 34,
+                        leftChild: undefined,
+                        rightChild: undefined
+                    }
                 },
                 rightChild: {
-                    data: 34,
+                    data: 4.2,
                     leftChild: undefined,
                     rightChild: undefined
                 }
             },
             rightChild: {
-                data: '+',
-                leftChild: {
-                    data: 4.2,
-                    leftChild: undefined,
-                    rightChild: undefined
-                },
-                rightChild: {
-                    data: 63,
-                    leftChild: undefined,
-                    rightChild: undefined
-                }
+                data: 63,
+                leftChild: undefined,
+                rightChild: undefined
             }
         });
     });
@@ -79,18 +79,50 @@ describe('queryParser', function() {
         });
     });
 
-    it('parses "5^3" to tree', function() {
-        query = '5^3';
+    it('parses "5*4-3.2^3+1.445" to tree', function() {
+        query = '-5*4-3.2^3+1.445';
 
         expect(queryParser(query)).toEqual({
-            data: '^',
+            data: '+',
             leftChild: {
-                data: 5,
-                leftChild: undefined,
-                rightChild: undefined
+                data: '-',
+                leftChild: {
+                    data: '-',
+                    leftChild: {
+                        data: 0,
+                        leftChild: undefined,
+                        rightChild: undefined
+                    },
+                    rightChild: {
+                        data: '*',
+                        leftChild: {
+                            data: 5,
+                            leftChild: undefined,
+                            rightChild: undefined
+                        },
+                        rightChild: {
+                            data: 4,
+                            leftChild: undefined,
+                            rightChild: undefined
+                        }
+                    }
+                },
+                rightChild: {
+                    data: '^',
+                    leftChild: {
+                        data: 3.2,
+                        leftChild: undefined,
+                        rightChild: undefined
+                    },
+                    rightChild: {
+                        data: 3,
+                        leftChild: undefined,
+                        rightChild: undefined
+                    }
+                }
             },
             rightChild: {
-                data: 3,
+                data: 1.445,
                 leftChild: undefined,
                 rightChild: undefined
             }

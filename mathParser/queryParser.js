@@ -4,7 +4,13 @@ const node = require('../structures/node');
 
 
 function queryParser(query) {
-    let SYMBOLS_ORDERD = ['-', '+', '/', '*', '^'];
+    let SYMBOLS_ORDERD = [
+        {symbol: '-', priority: 1},
+        {symbol: '+', priority: 1},
+        {symbol: '*', priority: 2},
+        {symbol: '/', priority: 2},
+        {symbol: '^', priority: 3}
+    ];
     query = trimWhitSpaces(query);
 
     let start = 0;
@@ -34,9 +40,9 @@ function queryParser(query) {
 
     function findLowestPrioritySymbol(start, end) {
         let symbolI = -1;
-        let priority = SYMBOLS_ORDERD.length;
+        let priority = SYMBOLS_ORDERD.length + 1;
 
-        for (let i = start; i <= end; i++) {
+        for (let i = end; i >= start; i--) {
             if (charIsSymbol(query[i])) {
                 let symbolPriority = getSymbolPriority(query[i]);
                 if (symbolPriority < priority) {
@@ -51,7 +57,7 @@ function queryParser(query) {
 
     function charIsSymbol(char) {
         for (let i = 0; i < SYMBOLS_ORDERD.length; i++) {
-            if (char === SYMBOLS_ORDERD[i]) {
+            if (char === SYMBOLS_ORDERD[i].symbol) {
                 return true;
             }
         }
@@ -61,8 +67,8 @@ function queryParser(query) {
 
     function getSymbolPriority(symbol) {
         for (let i = 0; i < SYMBOLS_ORDERD.length; i++) {
-            if (symbol === SYMBOLS_ORDERD[i]) {
-                return i;
+            if (symbol === SYMBOLS_ORDERD[i].symbol) {
+                return SYMBOLS_ORDERD[i].priority;
             }
         }
 
