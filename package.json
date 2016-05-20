@@ -4,7 +4,9 @@
   "description": "parses mathematical expersions (prefix) using binary trees",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --onlyChanged",
+    "test-all": "jest",
+    "test-coverage": "jest --coverage"
   },
   "author": "Alejandro Madariaga Angeles",
   "license": "ISC",
