@@ -1,6 +1,6 @@
 'use strict';
 
-const node = require('../structures/node');
+const Node = require('../structures/Node');
 
 
 function queryParser(query) {
@@ -17,16 +17,11 @@ function queryParser(query) {
 
     return queryParser(start, end);
 
-
-    function trimWhitSpaces(string) {
-        return string.replace(/\s/g, '');
-    }
-
     function queryParser(start, end) {
         let symbolI = findLowestPrioritySymbol(start, end);
 
         if (symbolI > -1) {
-            let rootNode = node(query[symbolI]);
+            let rootNode = Node(query[symbolI]);
             rootNode.leftChild = queryParser(start, symbolI - 1);
             rootNode.rightChild = queryParser(symbolI + 1, end);
 
@@ -34,7 +29,7 @@ function queryParser(query) {
         } else {
             let string = trimWhitSpaces(query.slice(start, end + 1));
             let number = Number(string);
-            return node(number);
+            return Node(number);
         }
     }
 
@@ -53,6 +48,10 @@ function queryParser(query) {
         }
 
         return symbolI;
+    }
+
+    function trimWhitSpaces(string) {
+        return string.replace(/\s/g, '');
     }
 
     function charIsSymbol(char) {

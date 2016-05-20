@@ -1,7 +1,7 @@
 'use strict';
 
 jest.unmock('../queryParser');
-jest.unmock('../../structures/node');
+jest.unmock('../../structures/Node');
 
 describe('queryParser', function() {
     const queryParser = require('../queryParser');

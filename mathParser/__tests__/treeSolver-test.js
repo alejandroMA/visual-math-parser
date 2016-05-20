@@ -2,7 +2,7 @@
 
 jest.unmock('../treeSolver');
 jest.unmock('../queryParser');
-jest.unmock('../../structures/node');
+jest.unmock('../../structures/Node');
 
 describe('treeSolver', function() {
     const treeSolver = require('../treeSolver');
