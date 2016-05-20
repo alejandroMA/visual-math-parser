@@ -11,20 +11,20 @@ describe('queryParser', function() {
         query = '';
     });
 
-    it('parses "50+34-4+63" to tree', function() {
-        query = '50+34-4+63';
+    it('parses "50+34-4.2+63" to tree', function() {
+        query = '50+34-4.2+63';
 
         expect(queryParser(query)).toEqual({
             data: '-',
             leftChild: {
                 data: '+',
                 leftChild: {
-                    data: '50',
+                    data: 50,
                     leftChild: undefined,
                     rightChild: undefined
                 },
                 rightChild: {
-                    data: '34',
+                    data: 34,
                     leftChild: undefined,
                     rightChild: undefined
                 }
@@ -32,12 +32,12 @@ describe('queryParser', function() {
             rightChild: {
                 data: '+',
                 leftChild: {
-                    data: '4',
+                    data: 4.2,
                     leftChild: undefined,
                     rightChild: undefined
                 },
                 rightChild: {
-                    data: '63',
+                    data: 63,
                     leftChild: undefined,
                     rightChild: undefined
                 }
@@ -51,7 +51,7 @@ describe('queryParser', function() {
         expect(queryParser(query)).toEqual({
             data: '+',
             leftChild: {
-                data: '15',
+                data: 15,
                 leftChild: undefined,
                 rightChild: undefined
             },
@@ -60,18 +60,18 @@ describe('queryParser', function() {
                 leftChild: {
                     data: '*',
                     leftChild: {
-                        data: '3',
+                        data: 3,
                         leftChild: undefined,
                         rightChild: undefined
                     },
                     rightChild: {
-                        data: '4',
+                        data: 4,
                         leftChild: undefined,
                         rightChild: undefined
                     }
                 },
                 rightChild: {
-                    data: '2',
+                    data: 2,
                     leftChild: undefined,
                     rightChild: undefined
                 }
@@ -85,12 +85,12 @@ describe('queryParser', function() {
         expect(queryParser(query)).toEqual({
             data: '^',
             leftChild: {
-                data: '5',
+                data: 5,
                 leftChild: undefined,
                 rightChild: undefined
             },
             rightChild: {
-                data: '3',
+                data: 3,
                 leftChild: undefined,
                 rightChild: undefined
             }
