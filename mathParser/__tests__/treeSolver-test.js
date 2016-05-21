@@ -1,9 +1,6 @@
 'use strict';
 
-jest.unmock('../treeSolver');
-jest.unmock('../queryParser');
-jest.unmock('../../structures/Node');
-jest.unmock('../../structures/Stack');
+jest.disableAutomock();
 
 describe('treeSolver', function() {
     const treeSolver = require('../treeSolver');

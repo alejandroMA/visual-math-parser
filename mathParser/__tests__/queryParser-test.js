@@ -1,8 +1,6 @@
 'use strict';
 
-jest.unmock('../queryParser');
-jest.unmock('../../structures/Node');
-jest.unmock('../../structures/Stack');
+jest.disableAutomock();
 
 describe('queryParser', function() {
     const queryParser = require('../queryParser');
