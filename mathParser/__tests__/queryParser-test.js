@@ -2,6 +2,7 @@
 
 jest.unmock('../queryParser');
 jest.unmock('../../structures/Node');
+jest.unmock('../../structures/Stack');
 
 describe('queryParser', function() {
     const queryParser = require('../queryParser');
@@ -41,6 +42,40 @@ describe('queryParser', function() {
                 data: 63,
                 leftChild: undefined,
                 rightChild: undefined
+            }
+        });
+    });
+
+    it('parses "(  ((50+34 ) * (4+63)  ))" to tree', function() {
+        query = '(  ((50+34 ) * (4+63)  ))';
+
+        expect(queryParser(query)).toEqual({
+            data: '*',
+            leftChild: {
+                data: '+',
+                leftChild: {
+                    data: 50,
+                    leftChild: undefined,
+                    rightChild: undefined
+                },
+                rightChild: {
+                    data: 34,
+                    leftChild: undefined,
+                    rightChild: undefined
+                }
+            },
+            rightChild: {
+                data: '+',
+                leftChild: {
+                    data: 4,
+                    leftChild: undefined,
+                    rightChild: undefined
+                },
+                rightChild: {
+                    data: 63,
+                    leftChild: undefined,
+                    rightChild: undefined
+                }
             }
         });
     });
