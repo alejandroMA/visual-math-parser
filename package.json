@@ -11,6 +11,6 @@
   "author": "Alejandro Madariaga Angeles",
   "license": "ISC",
   "devDependencies": {
-    "jest-cli": "^12.0.2"
+    "jest-cli": "^12.1.1"
   }
 }
