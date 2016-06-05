@@ -15,16 +15,20 @@ describe('Stack', function() {
     });
 
     it('can peek, push, pop', function() {
-        expect(stack.peek()).toEqual(5);
-        expect(stack.pop()).toEqual(5);
-        expect(stack.pop()).toEqual(2);
+        expect(stack.peek()).toBe(5);
+        expect(stack.pop()).toBe(5);
+        expect(stack.pop()).toBe(2);
+    });
+
+    it('it has size', function() {
+        expect(stack.size).toBe(2);
     });
 
     it('can can check for emptyness', function() {
-        expect(stack.isEmpty()).toEqual(false);
+        expect(stack.isEmpty()).toBe(false);
         stack.pop();
         stack.pop();
-        expect(stack.isEmpty()).toEqual(true);
+        expect(stack.isEmpty()).toBe(true);
     });
 
     it('throws on underflow', function() {
