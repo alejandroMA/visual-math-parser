@@ -3,7 +3,7 @@
 const getInnerScopesList = require('./getInnerScopesList');
 
 
-function OuterScopeIterator(query, start, end) {
+function scopeIterator(query, start, end) {
     let innerScopesList = getInnerScopesList(query, start, end);
     let outerScopeIterator = [];
 
@@ -31,4 +31,4 @@ function OuterScopeIterator(query, start, end) {
 }
 
 
-module.exports = OuterScopeIterator;
+module.exports = scopeIterator;

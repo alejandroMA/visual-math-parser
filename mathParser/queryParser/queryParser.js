@@ -2,7 +2,7 @@
 
 const Node = require('../../structures/Node');
 const getOuterScope = require('./getOuterScope');
-const OuterScopeIterator = require('./outerScopeIterator');
+const scopeIterator = require('./scopeIterator');
 
 
 let SYMBOLS_ORDERD = [
@@ -46,7 +46,7 @@ function queryParser(query, start, end) {
     }
 
     function findLowestPrioritySymbol() {
-        let outerScopeIterator = OuterScopeIterator(query, start, end);
+        let outerScopeIterator = scopeIterator(query, start, end);
 
         let symbolI = -1;
         let priority = SYMBOLS_ORDERD.length + 1;
