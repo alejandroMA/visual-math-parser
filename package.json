@@ -4,6 +4,8 @@
   "description": "parses mathematical expersions (prefix) using binary trees",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --define process.env.NODE_ENV=\"'production'\" --progress --colors -p",
+    "watch": "webpack --progress --colors --watch -d",
     "test": "jest --onlyChanged",
     "test-all": "jest",
     "test-coverage": "jest --coverage"
@@ -11,6 +13,13 @@
   "author": "Alejandro Madariaga Angeles",
   "license": "ISC",
   "devDependencies": {
-    "jest-cli": "^12.1.1"
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "jest-cli": "^12.1.1",
+    "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "d3": "^3.5.17"
   }
 }
