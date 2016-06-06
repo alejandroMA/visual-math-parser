@@ -4,13 +4,14 @@ body {
 }
 
 .node circle {
-  fill: #fff;
-  stroke: steelblue;
-  stroke-width: 1.5px;
+  fill: #00897B;
+  stroke: #004D40;
+  stroke-width: 3px;
 }
 
 .node text {
-  font: 12px;
+  font-size: 20px;
+  fill: #FFF;
 }
 
 .link {
@@ -19,13 +20,6 @@ body {
   stroke-width: 1.5px;
 }
 
-/*.container {
-    width: 1000px;
-    height: 1000px;
-}*/
-
-/*svg {
-    display: block;
-    width: 500px;
-    height: 500px;
-}*/
+.tree-view {
+    border: solid 1px #000;
+}

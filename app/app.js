@@ -12,77 +12,26 @@ container.appendChild(svg);
 
 let treeView = TreeView(svg);
 
-let bTree = queryParser('(5+3)*(2-1)');
+let bTree = queryParser('((3-(2/1))+((4+1)*5)+4*3-(2*5)) - 14');
 // console.log(binaryTreeToTree(bTree));
 
 treeView.render(binaryTreeToTree(bTree));
 
-setTimeout(function() {
-    bTree = queryParser('(8)*(2-1)');
-    treeView.render(binaryTreeToTree(bTree));
-}, 1500);
-
-setTimeout(function() {
-    bTree = queryParser('(8)*(1)');
-    treeView.render(binaryTreeToTree(bTree));
-}, 3000);
-
-
-setTimeout(function() {
-    bTree = queryParser('8');
-    treeView.render(binaryTreeToTree(bTree));
-}, 4500);
-
-// treeView.render({
-//         'data': '-',
-//         'children': [
-//             {
-//                 'data': '+',
-//                 'children': [
-//                     {
-//                         'data': '5'
-//                     },
-//                     {
-//                         'data': '2'
-//                     }
-//                 ]
-//             },
-//             {
-//                 'data': '*',
-//                 'children': [
-//                     {
-//                         'data': '2'
-//                     },
-//                     {
-//                         'data': '6'
-//                     }
-//                 ]
-//             }
-//         ]
-//     });
+// setTimeout(function() {
+//     bTree = queryParser('(8)*(2-1)');
+//     treeView.render(binaryTreeToTree(bTree));
+// }, 1500);
 
 // setTimeout(function() {
-//     treeView.render({
-//         'data': '-',
-//         'children': [
-//             {
-//                 'data': '7'
-//             },
-//             {
-//                 'data': '12'
-//             }
-//         ]
-//     });
-
-// }, 2000);
+//     bTree = queryParser('(8)*(1)');
+//     treeView.render(binaryTreeToTree(bTree));
+// }, 3000);
 
 
 // setTimeout(function() {
-//     treeView.render({
-//         'data': '-5'
-//     });
-
-// }, 4000);
+//     bTree = queryParser('8');
+//     treeView.render(binaryTreeToTree(bTree));
+// }, 4500);
 
 
 function binaryTreeToTree(binaryTree) {

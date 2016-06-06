@@ -16,20 +16,28 @@ function treeView(svgNode) {
     let _tree = {};
 
 
+    var zoom = d3.behavior.zoom()
+        .scaleExtent([-4, 2])
+        .on('zoom', zoomed);
+
+    zoom.translate([(width / 2), (margin.top + 30)]);
+
     var diagonal = d3.svg.diagonal()
     .projection(function(d) {
         // console.log(d);
         return [d.x, d.y];
     });
 
-    var treeLayout = d3.layout.tree().size([height - 30, width]);
+    var treeLayout = d3.layout.tree().size([height - 30, (margin.top + 30)]);
     treeLayout.nodeSize([65, 65]);
 
     var svg = d3.select('body').append('svg')
+        .attr('class', 'tree-view')
         .attr('width', width + margin.right + margin.left)
         .attr('height', height + margin.top + margin.bottom)
+        .call(zoom)
         .append('g')
-        .attr('transform', 'translate(' + ((width / 2) + (margin.right *2)) + ',' + (margin.top + 30) + ')');
+        .attr('transform', 'translate(' + (width / 2) + ',' + (margin.top + 30) + ')');
     // var svg = d3.select(svgNode)
     //     .attr('width', width + margin.right + margin.left)
     //     .attr('height', height + margin.top + margin.bottom)
@@ -110,14 +118,6 @@ function treeView(svgNode) {
             return d.data;
         });
 
-        nodeUpdate.select('rect')
-            .attr('width', rectW)
-            .attr('height', rectH)
-            .attr('stroke', 'black')
-            .attr('stroke-width', 1)
-            .style('fill', function(d) {
-            return d._children ? 'lightsteelblue' : '#fff';
-        });
 
         // nodeUpdate.select('text')
         //     .style('fill-opacity', 1);
@@ -137,12 +137,7 @@ function treeView(svgNode) {
         });
 
         nodeEnter.append('circle')
-            .attr('r', 30)
-            .attr('stroke', 'black')
-            .attr('stroke-width', 1)
-            .style('fill', function(d) {
-            return d._children ? 'lightsteelblue' : '#fff';
-        });
+            .attr('r', 30);
 
         nodeEnter.append('text')
             .attr('x', 0)
@@ -173,11 +168,9 @@ function treeView(svgNode) {
 
         nodeExit.select('rect')
             .attr('width', rectW)
-            .attr('height', rectH)
+            .attr('height', rectH);
         // .attr('width', bbox.getBBox().width)'
-        // .attr('height', bbox.getBBox().height)
-        .attr('stroke', 'black')
-            .attr('stroke-width', 1);
+        // .attr('height', bbox.getBBox().height);
 
         nodeExit.select('text');
 
@@ -251,6 +244,9 @@ function treeView(svgNode) {
         });
     }
 
+    function zoomed() {
+        svg.attr('transform', 'translate(' + d3.event.translate + ')scale(' + d3.event.scale + ')');
+    }
 
     return {
         render(tree) {
