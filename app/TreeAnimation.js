@@ -27,8 +27,8 @@ function TreeAnimation() {
             return;
         } else if (step === chageIndex) {
             clearInterval(interval);
+            duration = 500;
             setTimeout(function() {
-                duration = 500;
                 if (play) {
                     interval = setInterval(update, duration);
                 }
