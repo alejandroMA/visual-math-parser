@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2016 by original authors @ fontello.com</metadata>
+<defs>
+<font id="playback" horiz-adv-x="1000" >
+<font-face font-family="playback" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="play" unicode="&#xe800;" d="M18 797l670-446-670-448 0 894z" horiz-adv-x="705" />
+
+<glyph glyph-name="pause" unicode="&#xe801;" d="M18-97l0 894 223 0 0-894-223 0z m446 0l0 894 224 0 0-894-224 0z" horiz-adv-x="705" />
+
+<glyph glyph-name="to-start" unicode="&#xe802;" d="M911-97l-670 448 670 446 0-894z m-893 113l0 669 223 0 0-669-223 0z" horiz-adv-x="928" />
+
+<glyph glyph-name="to-end" unicode="&#xe803;" d="M18 797l670-446-670-448 0 894z m670-781l0 669 223 0 0-669-223 0z" horiz-adv-x="928" />
+
+<glyph glyph-name="stop" unicode="&#xe804;" d="M18-97l0 894 893 0 0-894-893 0z" horiz-adv-x="928" />
+
+<glyph glyph-name="play-circle2" unicode="&#xe805;" d="M465 797q184 0 315-131t131-316-131-315-315-132-316 132-131 315 131 316 316 131z m-167-670l446 224-446 223 0-447z" horiz-adv-x="928" />
+</font>
+</defs>
+</svg>

@@ -43,11 +43,11 @@ form.onButtonClick(function() {
     let result = mathParser(query);
 
     if ((query !== '') && !isNaN(result)) {
+        form.setResult(result);
+
         treeAnimation.pause();
         treeView.clear();
         treeAnimation.clear();
-
-        form.setResult(result);
 
         treeAnimation.newQuery(query);
         treeAnimation.play();
