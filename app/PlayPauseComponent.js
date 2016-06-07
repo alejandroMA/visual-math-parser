@@ -1,7 +1,7 @@
 'use strict';
 
 // <div>
-//     <button class="play-pause">play</button>
+//     <button class="play-pause"><i class="icon"></i></button>
 // </div>
 
 function PlayPauseComponent() {
@@ -10,9 +10,14 @@ function PlayPauseComponent() {
     let valueChangeCallback = function() {};
 
     let div = document.createElement('div');
+
     let button = document.createElement('button');
         button.className = 'play-pause';
-        button.textContent = 'play';
+
+    let icon = document.createElement('i');
+        icon.className = 'icon-play';
+
+    button.appendChild(icon);
     div.appendChild(button);
 
     button.addEventListener('click', function() {
@@ -28,8 +33,7 @@ function PlayPauseComponent() {
     }
 
     function updateUI() {
-        button.textContent = value;
-        // button.className = 
+        icon.className = 'icon-' + value;
     }
 
     return {
