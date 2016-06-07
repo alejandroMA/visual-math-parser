@@ -2,15 +2,16 @@
 
 
 function treeSolver(tree) {
-    if ((tree.leftChild !== undefined) && (tree.rightChild !== undefined)) {
-        let symbol = tree.data;
-        let leftNumber = treeSolver(tree.leftChild);
-        let rightNumber = treeSolver(tree.rightChild);
-
-        return mathOperation(symbol, rightNumber, leftNumber);
-    } else {
-        return tree.data;
+    if ((tree.leftChild === undefined) && (tree.rightChild === undefined)) {
+        let number = tree.data;
+        return number;
     }
+
+    let symbol = tree.data;
+    let leftNumber = treeSolver(tree.leftChild);
+    let rightNumber = treeSolver(tree.rightChild);
+
+    return mathOperation(symbol, rightNumber, leftNumber);
 }
 
 function mathOperation(symbol, rightNumber, leftNumber) {

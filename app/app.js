@@ -3,35 +3,36 @@
 const mathParser = require('../mathParser');
 const queryParser = require('../mathParser/queryParser');
 const TreeView = require('./treeView');
+const treeSolvingBySteps = require('./treeSolvingBySteps');
+const treeBuildingBySteps = require('./treeBuildingBySteps');
+
 
 let container = document.querySelector('.container');
-let svg = document.createElement('svg');
+let treeView = TreeView(container);
+
+let query = '((3-(2/1))+((4.3+1)*5)+4*3-(2*5)) - 14';
+// query = '(5+3)*(2-1)';
+// query = '2^8 * 4 - 20';
+
+let steps = treeBuildingBySteps(queryParser(query));
+steps = steps.concat(treeSolvingBySteps(queryParser(query)));
+
+treeView.render(steps[0]);
+
+let duration = 500;
+let step = 0;
+let interval = setInterval(update, duration);
 
 
-container.appendChild(svg);
+function update() {
+    if (step >= steps.length) {
+        clearInterval(interval);
+        return;
+    }
 
-let treeView = TreeView(svg);
-
-let bTree = queryParser('((3-(2/1))+((4+1)*5)+4*3-(2*5)) - 14');
-// console.log(binaryTreeToTree(bTree));
-
-treeView.render(binaryTreeToTree(bTree));
-
-// setTimeout(function() {
-//     bTree = queryParser('(8)*(2-1)');
-//     treeView.render(binaryTreeToTree(bTree));
-// }, 1500);
-
-// setTimeout(function() {
-//     bTree = queryParser('(8)*(1)');
-//     treeView.render(binaryTreeToTree(bTree));
-// }, 3000);
-
-
-// setTimeout(function() {
-//     bTree = queryParser('8');
-//     treeView.render(binaryTreeToTree(bTree));
-// }, 4500);
+    treeView.render(binaryTreeToTree(steps[step]));
+    step++;
+}
 
 
 function binaryTreeToTree(binaryTree) {
@@ -39,7 +40,7 @@ function binaryTreeToTree(binaryTree) {
         return;
     }
 
-    if (binaryTree.leftChild !== undefined && binaryTree.rightChild !== undefined) {
+    if (binaryTree.leftChild !== undefined || binaryTree.rightChild !== undefined) {
         binaryTree.children = [];
     }
     
