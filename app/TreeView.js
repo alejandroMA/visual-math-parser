@@ -2,7 +2,7 @@
 
 const d3 = require('d3');
 
-function treeView(containerNode) {
+function TreeView(containerNode) {
     let margin = { top: 20, right: 20, bottom: 20, left: 20 };
     let width = 800 - margin.right - margin.left;
     let height = 500 - margin.top - margin.bottom;
@@ -15,13 +15,13 @@ function treeView(containerNode) {
 
     var zoom = d3.behavior.zoom()
         .scaleExtent([0.25, 1.5])
+        .translate([(width / 2), (margin.top + 30)])
         .on('zoom', zoomed);
-    zoom.translate([(width / 2), (margin.top + 30)]);
 
     var diagonal = d3.svg.diagonal()
-    .projection(function(d) {
-        return [d.x, d.y];
-    });
+        .projection(function(d) {
+            return [d.x, d.y];
+        });
 
     var treeLayout = d3.layout.tree()
         .size([width, height])
@@ -66,8 +66,6 @@ function treeView(containerNode) {
         });
 
         // Update the nodes…
-        // svg.selectAll('g.node').remove();
-        // var node = svg.selectAll('g.node').data(nodes);
         let usedDepths = [];
         node = node.data(nodes, function(d) {
             if (d.id !== undefined) {
@@ -91,6 +89,7 @@ function treeView(containerNode) {
         });
         // console.log(usedDepths);
 
+
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()
             .delay(duration / 3)
@@ -100,7 +99,7 @@ function treeView(containerNode) {
             })
             // .style('opacity', 1);
             .style('opacity', function(d) {
-                return (d.data) ? 1 : 0;
+                return (d.data !== undefined) ? 1 : 0;
             });
 
         nodeUpdate.select('text').text(function(d) {
@@ -139,7 +138,7 @@ function treeView(containerNode) {
                 return 'translate(' + (d.x) + ',' + (d.y) + ')';
             })
             .style('opacity', function(d) {
-                return (d.data) ? 1 : 0;
+                return (d.data !== undefined) ? 1 : 0;
             });
 
 
@@ -158,8 +157,6 @@ function treeView(containerNode) {
 
 
         // Update the links…
-        // svg.selectAll('path.link').remove();
-        // var link = svg.selectAll('path.link').data(links);
         link = link.data(links, function(d) {
             return d.source.id + '-' + d.target.id;
         });
@@ -170,9 +167,10 @@ function treeView(containerNode) {
             .duration(duration / 3)
             // .style('opacity', 1)
             .style('opacity', function(d) {
-                return (d.target.data) ? 1 : 0;
+                return (d.target.data !== undefined) ? 1 : 0;
             })
             .attr('d', diagonal);
+
 
         // Enter any new links at the parent's previous position.
         let linkEnter = link.enter().insert('path', 'g')
@@ -189,18 +187,16 @@ function treeView(containerNode) {
                 });
             });
 
-
         linkEnter.transition()
             .delay(duration * (2 / 3))
             .duration(duration / 3)
             .style('opacity', function(d) {
-                return (d.data) ? 1 : 0;
+                return (d.target.data !== undefined) ? 1 : 0;
             })
             .attr('d', diagonal);
 
 
         // Transition exiting nodes to the parent's new position.
-
         link.exit().transition()
             .duration(duration / 3)
             .style('opacity', 0)
@@ -232,9 +228,17 @@ function treeView(containerNode) {
             update();
         },
         clear() {
+            _tree = {};
 
+            // node.data([]).exit().remove();
+            // link.data([]).exit().remove();
+
+            node
+                .attr('opacity', 0);
+            link
+                .attr('opacity', 0);
         }
     };
 }
 
-module.exports = treeView;
+module.exports = TreeView;

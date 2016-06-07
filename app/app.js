@@ -2,58 +2,67 @@
 
 const mathParser = require('../mathParser');
 const queryParser = require('../mathParser/queryParser');
-const TreeView = require('./treeView');
-const treeSolvingBySteps = require('./treeSolvingBySteps');
-const treeBuildingBySteps = require('./treeBuildingBySteps');
+const TreeView = require('./TreeView');
+const TreeAnimation = require('./TreeAnimation');
+const FormComponent = require('./FormComponent');
+const PlayPauseComponent = require('./PlayPauseComponent');
 
 
+let treeAnimation = TreeAnimation();
 let container = document.querySelector('.container');
+let form = FormComponent();
+    container.appendChild(form.getDomNode());
+let playPause = PlayPauseComponent();
+    playPause.deactivate();
+    container.appendChild(playPause.getDomNode());
 let treeView = TreeView(container);
 
-let query = '((3-(2/1))+((4.3+1)*5)+4*3-(2*5)) - 14';
-// query = '(5+3)*(2-1)';
-// query = '2^8 * 4 - 20';
 
-let steps = treeBuildingBySteps(queryParser(query));
-steps = steps.concat(treeSolvingBySteps(queryParser(query)));
+treeAnimation.onSetStep(function() {
+    let tree = treeAnimation.getCurrentState();
+    treeView.render(tree);
+});
 
-treeView.render(steps[0]);
+treeAnimation.onDone(function() {
+    playPause.setValue('pause');
+    playPause.deactivate();
+});
 
-let duration = 500;
-let step = 0;
-let interval = setInterval(update, duration);
-
-
-function update() {
-    if (step >= steps.length) {
-        clearInterval(interval);
-        return;
+playPause.onValueChange(function() {
+    if (playPause.getValue() == 'play') {
+        treeAnimation.play();
+    } else if (playPause.getValue() == 'pause') {
+        treeAnimation.pause();
     }
+});
 
-    treeView.render(binaryTreeToTree(steps[step]));
-    step++;
-}
+form.onButtonClick(function() {
+    let query = '((3-(2/1))+((4.3+1)*5)+4*3-(2*5)) - 14';
+    query = form.getQuery();
+    let result = mathParser(query);
+    // query = '(5+3)*(2-1)';
+    // query = '2^8 * 4 - 20';
+    console.log(query);
+    console.log(result);
+    console.log(!isNaN(result));
+    if ((query !== '') && !isNaN(result)) {
+        treeAnimation.pause();
+        treeView.clear();
+        treeAnimation.clear();
 
+        treeAnimation.newQuery(query);
+        treeAnimation.play();
 
-function binaryTreeToTree(binaryTree) {
-    if (binaryTree === undefined) {
-        return;
+        playPause.setValue('play');
+        playPause.activate();
     }
+});
 
-    if (binaryTree.leftChild !== undefined || binaryTree.rightChild !== undefined) {
-        binaryTree.children = [];
-    }
-    
-    if (binaryTree.leftChild !== undefined) {
-        binaryTreeToTree(binaryTree.leftChild);
-        binaryTree.children.push(binaryTree.leftChild);
-    }
 
-    if (binaryTree.rightChild !== undefined) {
-        binaryTreeToTree(binaryTree.rightChild);
-        binaryTree.children.push(binaryTree.rightChild);
-    }
 
-    return binaryTree;
-
-}
+// setTimeout(function() {
+//     treeAnimation.pause();
+//     setTimeout(function() {
+//         treeAnimation.play();
+//     }, 1000);
+// }, 5000);

@@ -1,7 +1,76 @@
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  background-color: #20222B;
+  color: #fff;
+  font-family: "Myriad Set Pro",
+    "Helvetica Neue", "Helvetica",
+    "Arial", "Verdana";
+  font-size: 14pt;
 }
+
+.container {
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.tree-view {
+  background-color: #3a3d47;
+  border: solid 1px #7e7f8b;
+}
+
+.play-pause {
+  background-color: #161822;
+  color: #fff;
+  border: solid 1px #4b4e58;
+  border-radius: 3px;
+  margin: 5px 0;
+  padding: 5px 8px;
+  transition: background-color 250ms;
+}
+  .play-pause:hover {
+    outline: none;
+    background-color: #34363C;
+  }
+  .play-pause:active {
+    outline: none;
+    background-color: #4b4e58;
+  }
+  .play-pause:focus {
+    outline: none;
+  }
+
+.form {
+
+}
+  .form input {
+    width: 500px;
+    background-color: #161822;
+    border: solid 1px #7e7f8b;
+    color: #fff;
+    font-size: 14pt;
+  }
+    .form input:focus {
+      outline: none;
+    }
+  .form button {
+    background-color: #161822;
+    border: solid 1px #7e7f8b;
+    color: #fff;
+    font-size: 14pt;
+    transition: background-color 250ms;
+  }
+    .form button:hover {
+      outline: none;
+      background-color: #34363C;
+    }
+    .form button:active {
+      background-color: #4b4e58;
+    }
+    .form button:focus {
+      outline: none;
+    }
 
 .node circle {
   fill: #00897B;
@@ -18,8 +87,4 @@ body {
   fill: none;
   stroke: #ccc;
   stroke-width: 1.5px;
-}
-
-.tree-view {
-    border: solid 1px #000;
 }
