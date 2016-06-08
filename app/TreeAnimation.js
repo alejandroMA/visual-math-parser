@@ -27,10 +27,9 @@ function TreeAnimation() {
             return;
         } else if (step === chageIndex) {
             clearInterval(interval);
-            duration = 500;
             setTimeout(function() {
                 if (play) {
-                    interval = setInterval(update, duration);
+                    interval = setInterval(update, duration * 2);
                 }
             }, 1000);
         }

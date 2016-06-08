@@ -24,7 +24,7 @@ body {
   background-color: #161822;
   color: #fff;
   border: solid 1px #4b4e58;
-  border-radius: 3px;
+  border-radius: 5px;
   margin: 5px 0;
   padding: 5px 8px;
   transition: background-color 250ms;
@@ -102,8 +102,12 @@ body {
   font-weight: normal;
   font-style: normal;
 }
-/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
-/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+ * Chrome hack: SVG is rendered more smooth in Windozze. 100% magic,
+ * uncomment if you need it.
+ * Note, that will break hinting!
+ * In other OS-es font will be not as sharp as it could be 
+ */
 /*
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
