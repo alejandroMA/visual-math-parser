@@ -1,7 +1,7 @@
 {
-  "name": "math-parser",
+  "name": "visual-math-parser",
   "version": "1.0.0",
-  "description": "parses mathematical expersions (prefix) using binary trees",
+  "description": "Parses mathematical expersions (prefix) using binary trees",
   "main": "index.js",
   "scripts": {
     "build": "webpack --define process.env.NODE_ENV=\"'production'\" --progress --colors -p",
