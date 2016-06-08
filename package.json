@@ -11,7 +11,7 @@
     "test-coverage": "jest --coverage"
   },
   "author": "Alejandro Madariaga Angeles",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "devDependencies": {
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
