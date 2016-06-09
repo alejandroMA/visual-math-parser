@@ -112,7 +112,7 @@ describe('queryParser', function() {
         });
     });
 
-    it('parses "5*4-3.2^3+1.445" to tree', function() {
+    it('parses "-5*4-3.2^3+1.445" to tree', function() {
         query = '-5*4-3.2^3+1.445';
 
         expect(queryParser(query)).toEqual({
@@ -120,24 +120,16 @@ describe('queryParser', function() {
             leftChild: {
                 data: '-',
                 leftChild: {
-                    data: '-',
+                    data: '*',
                     leftChild: {
-                        data: 0,
+                        data: -5,
                         leftChild: undefined,
                         rightChild: undefined
                     },
                     rightChild: {
-                        data: '*',
-                        leftChild: {
-                            data: 5,
-                            leftChild: undefined,
-                            rightChild: undefined
-                        },
-                        rightChild: {
-                            data: 4,
-                            leftChild: undefined,
-                            rightChild: undefined
-                        }
+                        data: 4,
+                        leftChild: undefined,
+                        rightChild: undefined
                     }
                 },
                 rightChild: {
@@ -156,6 +148,32 @@ describe('queryParser', function() {
             },
             rightChild: {
                 data: 1.445,
+                leftChild: undefined,
+                rightChild: undefined
+            }
+        });
+    });
+
+    it('handles negative numbers "2*-3--2"', function() {
+        query = '2*-3--2';
+
+        expect(queryParser(query)).toEqual({
+            data: '-',
+            leftChild: {
+                data: '*',
+                leftChild: {
+                    data: 2,
+                    leftChild: undefined,
+                    rightChild: undefined
+                },
+                rightChild: {
+                    data: -3,
+                    leftChild: undefined,
+                    rightChild: undefined
+                }
+            },
+            rightChild: {
+                data: -2,
                 leftChild: undefined,
                 rightChild: undefined
             }

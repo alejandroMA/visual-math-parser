@@ -14,6 +14,18 @@ let SYMBOLS_ORDERD = [
 ];
 
 
+function queryParserImp(query) {
+    query = trimWhitSpaces(query);
+
+    let start = 0;
+    let end = query.length - 1;
+    return queryParser(query, start, end);
+}
+
+function trimWhitSpaces(string) {
+    return string.replace(/\s/g, '');
+}
+
 function queryParser(query, start, end) {
     ajustRangeToOuterScope();
 
@@ -30,11 +42,7 @@ function queryParser(query, start, end) {
         let symbolI = findLowestPrioritySymbol();
 
         if (symbolI === -1) {
-            if (start > end) {
-                return Node(0);
-            }
-
-            let string = trimWhitSpaces(query.slice(start, end + 1));
+            let string = query.slice(start, end + 1);
             return Node(Number(string));
         }
 
@@ -53,9 +61,11 @@ function queryParser(query, start, end) {
 
         for (let i = outerScopeIterator.length - 1; i >= 0; i--) {
             let index = outerScopeIterator[i];
-            let char = query[index];
-            if (charIsSymbol(char)) {
-                let symbolPriority = getSymbolPriority(char);
+
+            if (isCharAtIndexAnOperator(index)) {
+                let operator = query[index];
+                let symbolPriority = getSymbolPriority(operator);
+
                 if (symbolPriority < priority) {
                     symbolI = index;
                     priority = symbolPriority;
@@ -66,18 +76,35 @@ function queryParser(query, start, end) {
         return symbolI;
     }
 
-    function trimWhitSpaces(string) {
-        return string.replace(/\s/g, '');
-    }
+    function isCharAtIndexAnOperator(index) {
+        if (query[index] === '-') {
+            return isCharAtIndexMinusOperator(index);
+        }
 
-    function charIsSymbol(char) {
         for (let i = 0; i < SYMBOLS_ORDERD.length; i++) {
-            if (char === SYMBOLS_ORDERD[i].symbol) {
+            let operator = SYMBOLS_ORDERD[i];
+
+            if (query[index] === operator.symbol) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    function isCharAtIndexMinusOperator(index) {
+        // "-" duality as operator and part of a negative number
+        if (query[index] !== '-') {
+            return false;
+        }
+
+        if (index === start) {
+            return false;
+        } else if (isCharAtIndexAnOperator(index - 1)) {
+            return false;
+        }
+
+        return true;
     }
 
     function getSymbolPriority(symbol) {
@@ -91,10 +118,5 @@ function queryParser(query, start, end) {
     }
 }
 
-function queryParserImp(query) {
-    let start = 0;
-    let end = query.length - 1;
-    return queryParser(query, start, end);
-}
 
 module.exports = queryParserImp;
