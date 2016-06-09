@@ -7,17 +7,17 @@ function treeSolver(tree) {
         return number;
     }
 
-    let symbol = tree.data;
+    let operator = tree.data;
     let leftNumber = treeSolver(tree.leftChild);
     let rightNumber = treeSolver(tree.rightChild);
 
-    return mathOperation(symbol, rightNumber, leftNumber);
+    return mathOperation(operator, rightNumber, leftNumber);
 }
 
-function mathOperation(symbol, rightNumber, leftNumber) {
+function mathOperation(operator, rightNumber, leftNumber) {
     let result = undefined;
 
-    switch (symbol) {
+    switch (operator) {
         case '+':
             result = leftNumber + rightNumber;
             break;

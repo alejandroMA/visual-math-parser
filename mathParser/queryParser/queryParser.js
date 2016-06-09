@@ -5,12 +5,12 @@ const getOuterScope = require('./getOuterScope');
 const scopeIterator = require('./scopeIterator');
 
 
-let SYMBOLS_ORDERD = [
-    {symbol: '-', priority: 1},
-    {symbol: '+', priority: 1},
-    {symbol: '*', priority: 2},
-    {symbol: '/', priority: 2},
-    {symbol: '^', priority: 3}
+let OPERATORS_ORDERD = [
+    {operator: '-', priority: 1},
+    {operator: '+', priority: 1},
+    {operator: '*', priority: 2},
+    {operator: '/', priority: 2},
+    {operator: '^', priority: 3}
 ];
 
 
@@ -39,41 +39,41 @@ function queryParser(query, start, end) {
     }
 
     function buildTree() {
-        let symbolI = findLowestPrioritySymbol();
+        let operatorI = findLowestPriorityOperator();
 
-        if (symbolI === -1) {
+        if (operatorI === -1) {
             let string = query.slice(start, end + 1);
             return Node(Number(string));
         }
 
-        let rootNode = Node(query[symbolI]);
-        rootNode.leftChild = queryParser(query, start, symbolI - 1);
-        rootNode.rightChild = queryParser(query, symbolI + 1, end);
+        let rootNode = Node(query[operatorI]);
+        rootNode.leftChild = queryParser(query, start, operatorI - 1);
+        rootNode.rightChild = queryParser(query, operatorI + 1, end);
 
         return rootNode;
     }
 
-    function findLowestPrioritySymbol() {
+    function findLowestPriorityOperator() {
         let outerScopeIterator = scopeIterator(query, start, end);
 
-        let symbolI = -1;
-        let priority = SYMBOLS_ORDERD.length + 1;
+        let operatorI = -1;
+        let priority = OPERATORS_ORDERD.length + 1;
 
         for (let i = outerScopeIterator.length - 1; i >= 0; i--) {
             let index = outerScopeIterator[i];
 
             if (isCharAtIndexAnOperator(index)) {
                 let operator = query[index];
-                let symbolPriority = getSymbolPriority(operator);
+                let operatorPriority = getOperatorPriority(operator);
 
-                if (symbolPriority < priority) {
-                    symbolI = index;
-                    priority = symbolPriority;
+                if (operatorPriority < priority) {
+                    operatorI = index;
+                    priority = operatorPriority;
                 }
             }
         }
 
-        return symbolI;
+        return operatorI;
     }
 
     function isCharAtIndexAnOperator(index) {
@@ -81,10 +81,10 @@ function queryParser(query, start, end) {
             return isCharAtIndexMinusOperator(index);
         }
 
-        for (let i = 0; i < SYMBOLS_ORDERD.length; i++) {
-            let operator = SYMBOLS_ORDERD[i];
+        for (let i = 0; i < OPERATORS_ORDERD.length; i++) {
+            let operator = OPERATORS_ORDERD[i];
 
-            if (query[index] === operator.symbol) {
+            if (query[index] === operator.operator) {
                 return true;
             }
         }
@@ -107,10 +107,10 @@ function queryParser(query, start, end) {
         return true;
     }
 
-    function getSymbolPriority(symbol) {
-        for (let i = 0; i < SYMBOLS_ORDERD.length; i++) {
-            if (symbol === SYMBOLS_ORDERD[i].symbol) {
-                return SYMBOLS_ORDERD[i].priority;
+    function getOperatorPriority(operator) {
+        for (let i = 0; i < OPERATORS_ORDERD.length; i++) {
+            if (operator === OPERATORS_ORDERD[i].operator) {
+                return OPERATORS_ORDERD[i].priority;
             }
         }
 
