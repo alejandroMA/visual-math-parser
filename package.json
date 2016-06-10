@@ -2,7 +2,8 @@
   "name": "visual-math-parser",
   "version": "1.0.0",
   "description": "Parses mathematical expersions (prefix) using binary trees",
-  "main": "index.js",
+  "main": "mathParser/index.js",
+  "repository": "https://github.com/alejandroMA/visual-math-parser",
   "scripts": {
     "build": "webpack --define process.env.NODE_ENV=\"'production'\" --progress --colors -p",
     "watch": "webpack --progress --colors --watch -d",
