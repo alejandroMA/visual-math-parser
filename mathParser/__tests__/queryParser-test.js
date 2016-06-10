@@ -1,6 +1,7 @@
 'use strict';
 
 jest.disableAutomock();
+// const pretty = require('js-object-pretty-print').pretty;
 
 describe('queryParser', function() {
     const queryParser = require('../queryParser');
@@ -174,6 +175,72 @@ describe('queryParser', function() {
             },
             rightChild: {
                 data: -2,
+                leftChild: undefined,
+                rightChild: undefined
+            }
+        });
+    });
+
+    it('handles implicit multiplications "(2) (3)5-2(8/2*2)+45"', function() {
+        query = '(2) (3)5-2(8/2*2)+45';
+
+        expect(queryParser(query)).toEqual({
+            data: '+',
+            leftChild: {
+                data: '-',
+                leftChild: {
+                    data: '*',
+                    leftChild: {
+                        data: '*',
+                        leftChild: {
+                            data: 2,
+                            leftChild: undefined,
+                            rightChild: undefined
+                        },
+                        rightChild: {
+                            data: 3,
+                            leftChild: undefined,
+                            rightChild: undefined
+                        }
+                    },
+                    rightChild: {
+                        data: 5,
+                        leftChild: undefined,
+                        rightChild: undefined
+                    }
+                },
+                rightChild: {
+                    data: '*',
+                    leftChild: {
+                        data: 2,
+                        leftChild: undefined,
+                        rightChild: undefined
+                    },
+                    rightChild: {
+                        data: '*',
+                        leftChild: {
+                            data: '/',
+                            leftChild: {
+                                data: 8,
+                                leftChild: undefined,
+                                rightChild: undefined
+                            },
+                            rightChild: {
+                                data: 2,
+                                leftChild: undefined,
+                                rightChild: undefined
+                            }
+                        },
+                        rightChild: {
+                            data: 2,
+                            leftChild: undefined,
+                            rightChild: undefined
+                        }
+                    }
+                }
+            },
+            rightChild: {
+                data: 45,
                 leftChild: undefined,
                 rightChild: undefined
             }

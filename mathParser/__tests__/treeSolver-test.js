@@ -40,4 +40,10 @@ describe('treeSolver', function() {
 
         expect(treeSolver(tree)).toEqual(28);
     });
+
+    it('resolves tree from "(2) (3)5-2(8/2*2)+45"', function() {
+        tree = queryParser('(2) (3)5-2(8/2*2)+45');
+
+        expect(treeSolver(tree)).toEqual(59);
+    });
 });
