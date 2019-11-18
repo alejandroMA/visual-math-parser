@@ -10,7 +10,7 @@ module.exports = {
         filename: 'app.min.js'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx$/,
                 exclude: [/node_modules/, /bower_components/, /vendor/],

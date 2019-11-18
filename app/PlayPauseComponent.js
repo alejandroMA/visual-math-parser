@@ -26,8 +26,8 @@ function PlayPauseComponent() {
 
     function toogleValue() {
         if (active) {
-            updateUI();
             value = (value === 'play') ? 'pause' : 'play';
+            updateUI();
             valueChangeCallback();
         }
     }
@@ -50,13 +50,15 @@ function PlayPauseComponent() {
             return toogleValue();
         },
         setValue(newValue) {
-            updateUI();
             value = newValue;
+            updateUI();
         },
         deactivate() {
+            button.setAttribute('disabled', true);
             active = false;
         },
         activate() {
+            button.removeAttribute('disabled');
             active = true;
         }
     };

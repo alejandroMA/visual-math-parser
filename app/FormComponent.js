@@ -7,10 +7,10 @@
 // </div>
 
 function FormComponent() {
-    let form = document.createElement('div');
-        form.className = 'form';
-
+    let container = document.createElement('div');
+    
     let div1 = document.createElement('div');
+        div1.className = 'form';
     let label = document.createElement('label');
         label.textContent = 'Math expression: ';
     let input = document.createElement('input');
@@ -32,12 +32,12 @@ function FormComponent() {
     div2.appendChild(labelSpan);
     div2.appendChild(span);
 
-    form.appendChild(div1);
-    form.appendChild(div2);
+    container.appendChild(div1);
+    container.appendChild(div2);
 
     return {
         getDomNode() {
-            return form;
+            return container;
         },
         onButtonClick(callback) {
             button.addEventListener('click', callback);

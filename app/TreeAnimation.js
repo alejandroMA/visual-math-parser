@@ -4,10 +4,9 @@ const queryParser = require('../mathParser/queryParser');
 const treeSolvingBySteps = require('./treeSolvingBySteps');
 const treeBuildingBySteps = require('./treeBuildingBySteps');
 
-
 function TreeAnimation() {
     let query = '';
-    let duration = 250;
+    let duration = 400;
     let steps = [];
     let step = 0;
     let play = false;
@@ -53,6 +52,9 @@ function TreeAnimation() {
             query = newQuery;
             calculateNewSteps();
         },
+        isPlaying() {
+            return play;
+        },
         play() {
             play = true;
             interval = setInterval(update, duration);
@@ -84,18 +86,25 @@ function TreeAnimation() {
             duration = newDuration;
         },
         next() {
-            if (step < steps.length -1) {
+            if (step < steps.length - 1) {
                 step++;
                 setStepCallBack();
             }
         },
         setStep(i) {
-            i = (i < 0) ? 0 : i;
+            i = i < 0 ? 0 : i;
+            i = i >= steps.length ? steps.length - 1 : i;
             step = i;
-            setStepCallBack();
+
+            if (steps.length > 0) {
+                setStepCallBack();
+            }
         },
         getStep() {
             return step;
+        },
+        getStepsLenght() {
+            return steps.length;
         },
         getCurrentState() {
             return steps[step];

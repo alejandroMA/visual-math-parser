@@ -19,10 +19,12 @@
     "babel-preset-es2015": "^6.9.0",
     "jest": "^17.0.3",
     "js-object-pretty-print": "^0.2.0",
-    "webpack": "^1.13.1"
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "d3": "^3.5.17",
+    "nouislider": "^14.0.3",
     "object-assign": "^4.1.0"
   }
 }
