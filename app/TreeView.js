@@ -104,7 +104,11 @@ function TreeView(containerNode) {
             });
 
         nodeUpdate.select('text').text(function(d) {
-            return d.data;
+            if (isNaN(d.data)) {
+                return d.data;
+            } else {
+                return Math.round(d.data * 100) / 100;
+            }
         });
 
         // Enter any new nodes at the parent's previous position.

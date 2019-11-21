@@ -22,6 +22,7 @@ function TreeAnimation() {
     function update() {
         if (step >= steps.length - 1) {
             clearInterval(interval);
+            play = false;
             doneCallBack();
             return;
         } else if (step === chageIndex) {

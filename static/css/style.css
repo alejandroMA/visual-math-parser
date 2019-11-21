@@ -95,6 +95,7 @@ body {
     background-color: #3a3d47;
     border: solid 1px #7e7f8b;
     margin-bottom: 15px;
+    touch-action: none;
 }
 
 .node circle {

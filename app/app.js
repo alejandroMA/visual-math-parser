@@ -43,13 +43,13 @@ form.onButtonClick(function() {
         slider.updateOptions(
             {
                 range: {
-                    min: 0,
+                    min: 1,
                     max: treeAnimation.getStepsLenght()
                 }
             },
             false
         );
-        slider.set(treeAnimation.getStep());
+        slider.set(treeAnimation.getStep() + 1);
         slider.enable();
 
         playPause.setValue('pause');
@@ -69,7 +69,7 @@ const debouncedSetStep = debounce(step => {
 
 treeAnimation.onSetStep(function() {
     let tree = treeAnimation.getCurrentState();
-    slider.set(treeAnimation.getStep());
+    slider.set(treeAnimation.getStep() + 1);
     treeView.render(tree);
 });
 
@@ -95,12 +95,12 @@ slider.onStart(function() {
 slider.onSlide(function(values) {
     treeAnimation.pause();
 
-    debouncedSetStep(parseInt(values[0]));
+    debouncedSetStep(parseInt(values[0]) - 1);
 });
 slider.onChange(function(values) {
     treeAnimation.pause();
 
-    debouncedSetStep(parseInt(values[0]));
+    debouncedSetStep(parseInt(values[0]) - 1);
 });
 slider.onMouseDown(function() {
     treeAnimation.pause();
@@ -110,6 +110,9 @@ playPause.onValueChange(function() {
     if (playPause.getValue() === 'play' && treeAnimation.isPlaying()) {
         treeAnimation.pause();
     } else if (playPause.getValue() === 'pause' && !treeAnimation.isPlaying()) {
+        if (treeAnimation.getStep() === treeAnimation.getStepsLenght() - 1) {
+            treeAnimation.setStep(0);
+        }
         treeAnimation.play();
     }
 });
